@@ -1,0 +1,137 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200;0,300;0,400;0,800;1,400&display=swap');
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #fdfdfd;
+  font-family: Nunito, sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  margin: 0;
+}
+
+body::after {
+  background-repeat: no-repeat;
+  background-size: cover;
+  content: '';
+  background-image: url(https://images.unsplash.com/photo-1575089976121-8ed7b2a54265?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8ZGV2ZWxvcGVyfGVufDB8MXwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60);
+  opacity: 0.25;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  position: fixed;
+  z-index: -1;
+}
+
+h1 {
+  text-align: center;
+  margin: 0px 0 5px;
+  padding-top: 40px;
+}
+
+i {
+  font-weight: 800;
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+.form {
+  background-color: rgb(51, 75, 141, 0.85);
+  color: #fdfdfd;
+  padding: 40px 40px;
+  box-shadow: 2px 5px 10px rgba(0, 0, 0, 0.4);
+  margin-top: 42px;
+  border-radius: 10px;
+  width: 80%;
+  max-width: 750px;
+  margin: 3.125rem auto 0 auto;
+}
+
+.form-control {
+  margin-bottom: 10px;
+  padding-bottom: 20px;
+  width: 100%;
+}
+
+.form-control label {
+  display: block; /* +++ */
+  margin-bottom: 6px;
+  font-size: 1.1em;
+}
+
+.form-control input {
+  border: 2px solid #f0f0f0;
+  border-radius: 4px;
+  display: block; /* so they are in their own line*/
+  width: 100%; /* 100% of the width of its container*/
+  padding: 10px;
+  font-size: 14px;
+}
+
+.form-control .radio {
+  margin-left: 25px;
+}
+
+.form-control select {
+  border: 1px solid #777;
+  border-radius: 2px;
+  padding: 10px;
+  display: block;
+  width: 100%;
+}
+
+p {
+  font-size: 1.1em;
+}
+.form-control input[type='radio'],
+.form-control input[type='checkbox'] {
+  display: inline-block;
+  width: auto;
+  position: absolute;
+  transform: scale(1.2);
+}
+
+.form-control .checkbox {
+  margin-left: 24px;
+}
+
+input,
+select,
+textarea {
+  margin: 0;
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+}
+
+.comments {
+  min-height: 120px;
+  width: 100%;
+  padding: 0.625rem;
+  resize: vertical;
+}
+
+.form-group button {
+  cursor: pointer;
+  background-color: #37af65;
+  border-radius: 4px;
+  color: #fff;
+  display: block;
+  font-size: 18px;
+  padding: 10px;
+  margin-top: 20px;
+  width: 100%;
+}
+
+.form-group button:hover {
+  background-color: #137037;
+}
+.form-group button:focus {
+  transform: scale(0.97);
+}
