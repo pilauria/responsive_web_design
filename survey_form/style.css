@@ -135,3 +135,12 @@ textarea {
 .form-group button:focus {
   transform: scale(0.97);
 }
+
+@media only screen and (max-width: 580px) {
+  /*  ***  */
+  header {
+    padding: 2px 80px;
+  }
+}
+
+/* ***  only screen, it means apply only to screen based layout and not print*/
