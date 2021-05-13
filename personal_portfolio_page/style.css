@@ -1,0 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Muli&display=swap');
+
+/* universal selector '*': apply what is into the {} to everything:*/
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Muli', sans-serif;
+  background-color: #f0f0f0;
+}
+
+.faq-container {
+  max-width: 600px;
+  margin: 0 auto;
+}

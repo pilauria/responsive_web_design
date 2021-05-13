@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./style.css" />
+    <title>FAQ</title>
+  </head>
+  <body>
+    <nav id="navbar">
+      <header class="header-1">React Documentation</header>
+      <a href="#React_interactivity:_Events_and_state" class="nav-link"
+        >React interactivity: Events and state</a
+      >
+      <a href="#Handling_events" class="nav-link">Handling events</a>
+      <a href="#Handling_form_submission" class="nav-link"
+        >Handling form submission</a
+      >
+      <a href="#Callback_props" class="nav-link">Callback props</a>
+      <a href="#State_and_the_useState_hook" class="nav-link"
+        >State and the useState hook</a
+      >
+    </nav>
+    <main id="main-doc">
+      <section class="main-section" id="React_interactivity:_Events_and_state">
+        <header class="header">React interactivity: Events and state</header>
+        <p>
+          With our component plan worked out, it's now time to start updating
+          our app from a completely static UI to one that actually allows us to
+          interact and change things. In this article we'll do this, digging
+          into events and state along the way, and ending up with an app in
+          which we can successfully add and delete tasks, and toggle tasks as
+          completed.
+        </p>
+      </section>
+      <section class="main-section" id="Handling_events">
+        <header class="header">Handling events</header>
+        <p>
+          If you've only written vanilla JavaScript before now, you might be
+          used to having a separate JavaScript file, where you query for some
+          DOM nodes and attach listeners to them. For example:
+        </p>
+        <pre>
+    <code
+      >const btn = document.querySelector('button');<br /><br />
+      btn.addEventListener('click', () => { <br />alert("hi!");<br />
+      });</code
+    >
+  </pre>
+        <p>
+          In React, we write event handlers directly on the elements in our JSX,
+          like this:
+        </p>
+        <pre><code>    &lt;button
+    type="button"
+    onClick={() => alert("hi!")}
+    &gt;
+      Say hi!
+    &lt;/button&gt;
+  </code></pre>
+        <p>
+          In the above example, we're adding an <code>onClick</code> attribute
+          to the <code>&lt;button&gt;</code> element. The value of that
+          attribute is a function that triggers a simple alert. The
+          <code>onClick</code> attribute has special meaning here: it tells
+          React to run a given function when the user clicks on the button.
+          There are a couple of other things to note:
+        </p>
+
+        <ul>
+          <li>
+            The camel-cased nature of <code>onClick</code> is important — JSX
+            will not recognize <code>onClick</code> (again, it is already used
+            in JavaScript for a specific purpose, which is related but different
+            — standard onclick handler properties).
+          </li>
+          <li>
+            All browser events follow this format in JSX – on, followed by the
+            name of the event.
+          </li>
+        </ul>
+        The
+        <p>
+          camel-cased nature of <code>onClick</code> is important — JSX will not
+          recognize <code>onClick</code> (again, it is already used in
+          JavaScript for a specific purpose, which is related but different —
+          standard onclick handler properties). All browser events follow this
+          format in JSX – on, followed by the name of the event. Let's apply
+          this to our app, starting in the <code>Form.js</code> component.
+        </p>
+      </section>
+      <section class="main-section" id="Handling_form_submission">
+        <header class="header">Handling form submission</header>
+        <p>
+          At the top of the Form() component function, create a function named
+          handleSubmit(). This function should prevent the default behavior of
+          the submit event. After that, it should trigger an alert(), which can
+          say whatever you’d like. It should end up looking something like this:
+        </p>
+        <pre><code>function handleSubmit(e) {
+      e.preventDefault();
+      alert('Hello, world!');
+    }</code></pre>
+        <p>
+          To use this function, add an onSubmit attribute to the &lt;form&gt;
+          element, and set its value to the <code>handleSubmit</code> function:
+        </p>
+        <pre><code>&lt;form& onSubmit={handleSubmit}&gt;</code></pre>
+        <p>
+          Now if you head back to your browser and click on the "Add" button,
+          your browser will show you an alert dialog with the words "Hello,
+          world!" — or whatever you chose to write there.
+        </p>
+      </section>
+      <section class="main-section" id="Callback_props">
+        <header class="header">Callback props</header>
+        <p>
+          In React applications, interactivity is rarely confined to just one
+          component: events that happen in one component will affect other parts
+          of the app. When we start giving ourselves the power to make new
+          tasks, things that happen in the <code>&lt;Form /&gt;</code> component
+          will affect the list rendered in <code>&lt;App /&gt;</code>.We want
+          our <code>handleSubmit()</code> function to ultimately help us create
+          a new task, so we need a way to pass information from
+          <code>&lt;Form /&gt;</code> to <code>&lt;App /&gt;</code>. We can't
+          pass data from child to parent in the same way as we pass data from
+          parent to child using standard props. Instead, we can write a function
+          in <code>&lt;App /&gt;</code> that will expect some data from our form
+          as an input, then pass that function to <code>&lt;Form /&gt;</code>as
+          a prop. This function-as-a-prop is called a callback prop. Once we
+          have our callback prop, we can call it inside
+          <code>&lt;Form /&gt;</code> to send the right data to
+          <code>&lt;App /&gt;</code>.
+        </p>
+      </section>
+      <section class="main-section" id="State_and_the_useState_hook">
+        <header class="header">State and the useState hook</header>
+        <p>
+          So far, we've used props to pass data through our components and this
+          has served us just fine. Now that we're dealing with user input and
+          data updates, however, we need something more. For one thing, props
+          come from the parent of a component. Our<code>&lt;Form /&gt;</code>
+          will not be inheriting a new name for our task; our<code
+            >&lt;input /&gt;</code
+          >
+          element lives directly inside of <code>&lt;Form /&gt;</code>, so
+          <code>&lt;Form /&gt;</code> will be directly responsible for creating
+          that new name. We can't ask <code>&lt;Form /&gt;</code> to
+          spontaneously create its own props, but we can ask it to track some of
+          its own data for us. Data such as this, which a component itself owns,
+          is called state. State is another powerful tool for React because
+          components not only own state, but can update it later. It's not
+          possible to update the props a component receives; only to read them.
+          React provides a variety of special functions that allow us to provide
+          new capabilities to components, like state. These functions are called
+          hooks, and the useState hook, as its name implies, is precisely the
+          one we need in order to give our component some state. To use a React
+          hook, we need to import it from the react module. In Form.js, change
+          your very first line so that it reads like this:
+        </p>
+        <pre><code>import React, { useState } from "react";</code></pre>
+        <p>
+          This allows us to import the useState() function by itself, and
+          utilize it anywhere in this file. useState() creates a piece of state
+          for a component, and its only parameter determines the initial value
+          of that state. It returns two things: the state, and a function that
+          can be used to update the state later. This is a lot to take in at
+          once, so let's try it out. We're going to make ourselves a name state,
+          and a function for updating the name state. Write the following above
+          your handleSubmit() function, inside Form():
+        </p>
+        <pre><code>const [name, setName] = useState('Use hooks!');</code></pre>
+        <p>What's going on in this line of code?</p>
+        <ul>
+          <li>We are setting the initial name value as "Use hooks!".</li>
+          <li>
+            We are defining a function whose job is to modify name, called
+            setName().
+          </li>
+          <li>
+            useState() returns these two things, so we are using array
+            destructuring to capture them both in separate variables.
+          </li>
+        </ul>
+      </section>
+    </main>
+  </body>
+</html>
